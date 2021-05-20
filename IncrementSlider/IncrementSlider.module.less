@@ -1,5 +1,6 @@
 // IncrementSlider.module.less
 //
+@import "../styles/mixins.less";
 @import "../styles/skin.less";
 
 .incrementSlider {
@@ -9,6 +10,28 @@
 		color: @agate-incrementslider-color;
 		margin: @agate-incrementslider-horizontal-margin;
 		direction: ltr;	// Always arrange this according to LTR rules
+		transform: @agate-slider-bg-transform;
+
+		&::before {
+			content: "";
+			position: absolute;
+			.position(0);
+			background-color: @agate-slider-bg-color;
+			background-image: @agate-slider-bg-image;
+			border-radius: @agate-slider-border-radius;
+		}
+
+		.decrementButton,
+		.incrementButton,
+		.slider {
+			transform: @agate-incrementslider-bg-transform;
+		}
+
+		.slider {
+			&::before {
+				content: none;
+			}
+		}
 
 		&.large {
 			/* Available for export */
@@ -45,7 +68,15 @@
 
 			&.small {
 				.slider {
+					height: @agate-incrementslider-small-height;
 					padding: @agate-incrementslider-horizontal-small-slider-padding;
+
+					.knob {
+						&::before {
+							height: @agate-incrementslider-small-knob-height;
+							width: @agate-incrementslider-small-knob-width;
+						}
+					}
 				}
 			}
 		}
@@ -84,6 +115,14 @@
 			&.small {
 				.slider {
 					padding: @agate-incrementslider-vertical-small-slider-padding;
+					width: @agate-button-small-height;
+
+					.knob {
+						&::before {
+							height: @agate-incrementslider-small-knob-height;
+							width: @agate-incrementslider-small-knob-width;
+						}
+					}
 				}
 			}
 		}
