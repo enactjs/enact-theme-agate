@@ -69,7 +69,7 @@ const ButtonBase = kind({
 		 * Valid values are:
 		 * * `'opaque'`,
 		 * * `'lightOpaque'`, and
-		 * * `'transparent'`.
+		 * * `'transparent'`
 		 *
 		 * @type {('opaque'|'lightOpaque'|'transparent')}
 		 * @default 'opaque'
