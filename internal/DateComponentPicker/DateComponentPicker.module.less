@@ -11,13 +11,15 @@
 	position: relative;
 
 	.applySkins({
-		.item,
-		.itemDecrement,
-		.itemIncrement {
-			&.active {
+		.active {
+			&::before {
 				background-color: transparent;
 				background-image: none;
 			}
+		}
+
+		.focusBackground {
+			height: 0;
 		}
 
 		&::before {

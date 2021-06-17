@@ -402,6 +402,7 @@ const PickerBase = kind({
 				} else return index - 1;
 			} else return 0;
 		},
+		focusBackgroundClassName: ({styler}) => styler.join('focusBackground'),
 		incrementAriaLabel: ({incrementAriaLabel, type}) => {
 			if (incrementAriaLabel != null) {
 				return incrementAriaLabel;
@@ -447,6 +448,7 @@ const PickerBase = kind({
 			decrementAriaLabel: decAriaLabel,
 			decrementItemIndex,
 			disabled,
+			focusBackgroundClassName,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
@@ -543,6 +545,7 @@ const PickerBase = kind({
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
+				<div className={focusBackgroundClassName} />
 				{skin === 'silicon'  &&
 					<PickerButtonItem
 						aria-controls={valueId}

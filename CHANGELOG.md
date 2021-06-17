@@ -16,6 +16,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Input` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
 - `agate/Keypad` to match latest design for Silicon skin
+- `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 
 ## [2.0.0-beta.3] - 2021-06-06
 

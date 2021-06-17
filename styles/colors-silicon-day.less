@@ -37,6 +37,7 @@
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-red-pink);
 @silicon-gradient-active: linear-gradient(to right, #6d2886, #af1b33);
 @silicon-gradient-disabled: linear-gradient(to right, #943bb4, #c62742);
+@silicon-gradient-vertical: linear-gradient(@silicon-vibrant-purple, @silicon-red-pink);
 
 // Abstracted Colors
 @agate-accent: var(--agate-accent-color, @silicon-accent);
@@ -272,13 +273,18 @@
 // Picker
 // ---------------------------------------
 @agate-picker-active-color: @agate-spotlight-color;
-@agate-picker-active-bg-color: @agate-accent;
-@agate-picker-active-bg-image: @agate-gradient;
-@agate-picker-item-color: fade(@agate-foreground, 50%);
+@agate-picker-active-bg-color: @silicon-charcoal;
+@agate-picker-active-bg-image: none;
+@agate-picker-horizontal-focus-bg-image: @silicon-gradient;
+@agate-picker-focus-bg-color: transparent;
+@agate-picker-focus-bg-image: @silicon-gradient-vertical;
+@agate-picker-focusBackground-item-color: fade(@agate-foreground-focus, 35%);
+@agate-picker-item-focus-color: @agate-foreground-focus;
+@agate-picker-item-color: fade(@agate-foreground, 35%);
 @agate-picker-item-bg-color: transparent;
 @agate-picker-item-decrement-bg-image: none;
 @agate-picker-item-increment-bg-image: none;
-@agate-picker-secondary-item-color: fade(@agate-foreground, 35%);
+@agate-picker-item-focus-bg-image: none;
 
 // Popup
 // ---------------------------------------

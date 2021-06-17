@@ -8,10 +8,18 @@
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	position: relative;
 
 	&.horizontal {
 		flex-direction: row;
 		display: inline-flex;
+	}
+
+	.focusBackground {
+		display: none;
+		position: absolute;
+		width: calc(100% - 90px);
+		z-index: 1;
 	}
 
 	.applySkins({
@@ -24,6 +32,26 @@
 		transform: @agate-picker-transform;
 		margin: @agate-picker-margin;
 		padding: @agate-picker-padding;
+
+		.focusBackground {
+			height: calc(100% - 2 * @agate-picker-padding);
+			background-color: @agate-picker-focus-bg-color;
+			background-image: @agate-picker-focus-bg-image;
+		}
+
+		&:focus-within,
+		&:hover {
+			.focusBackground {
+				display: block;
+			}
+
+			.itemDecrement,
+			.itemIncrement,
+			.secondaryItemIncrement,
+			.secondaryItemDecrement {
+				color: @agate-picker-focusBackground-item-color;
+			}
+		}
 
 		.sizingPlaceholder {
 			height: 0;
@@ -43,21 +71,10 @@
 		.secondaryItemIncrement,
 		.secondaryItemDecrement {
 			margin: 0;
-			color: inherit;
 			width: 100%;
 			text-align: center;
-			height: @agate-picker-item-height;
-			line-height: @agate-picker-item-height;
 
 			.sizingPlaceholder {
-				font-size: @agate-picker-active-font-size;
-				font-weight: @agate-picker-active-font-weight;
-			}
-
-			&.active {
-				color: @agate-picker-active-color;
-				background-color: @agate-picker-active-bg-color;
-				background-image: @agate-picker-active-bg-image;
 				font-size: @agate-picker-active-font-size;
 				font-weight: @agate-picker-active-font-weight;
 			}
@@ -73,32 +90,82 @@
 			});
 		}
 
-		.itemDecrement {
-			background-image: @agate-picker-item-decrement-bg-image;
+		.itemDecrement,
+		.itemIncrement,
+		.secondaryItemIncrement,
+		.secondaryItemDecrement {
+			background-color: @agate-picker-item-bg-color;
+			color: @agate-picker-item-color;
+			height: @agate-picker-item-height;
+			line-height: @agate-picker-item-height;
+			z-index: 2;
 		}
 
-		.itemIncrement {
-			background-image: @agate-picker-item-increment-bg-image;
+		.active {
+			color: @agate-picker-active-color;
+			font-size: @agate-picker-active-font-size;
+			font-weight: @agate-picker-active-font-weight;
+			height: @agate-picker-active-height;
+			line-height: @agate-picker-active-height;
+
+			.item {
+				z-index: 2;
+			}
+
+			&::before {
+				content: "";
+				background-color: @agate-picker-active-bg-color;
+				background-image: @agate-picker-active-bg-image;
+				position: absolute;
+				height: @agate-picker-active-height;
+				width: calc(100% - 2 * @agate-picker-padding);
+				left: 50%;
+				transform: translateX(-50%);
+			}
 		}
 
 		.itemDecrement,
-		.itemIncrement {
-			color: @agate-picker-item-color;
-			background-color: @agate-picker-item-bg-color;
+		.secondaryItemDecrement {
+			background-image: @agate-picker-item-decrement-bg-image;
 		}
 
-		.secondaryItemIncrement,
-		.secondaryItemDecrement {
-			color: @agate-picker-secondary-item-color;
+		.itemIncrement,
+		.secondaryItemIncrement {
+			background-image: @agate-picker-item-increment-bg-image;
 		}
 
 		&.horizontal {
+			padding: @agate-picker-horizontal-padding;
+
+			.focusBackground {
+				background-image: @agate-picker-horizontal-focus-bg-image;
+				height: calc(100% - 60px);
+				width: calc(100% - 2 * @agate-picker-padding);
+			}
+
 			.item,
 			.itemDecrement,
 			.itemIncrement,
 			.secondaryItemIncrement,
 			.secondaryItemDecrement {
+				height: @agate-picker-horizontal-item-height;
+				line-height: @agate-picker-horizontal-item-height;
+			}
+
+			.itemDecrement,
+			.itemIncrement,
+			.secondaryItemIncrement,
+			.secondaryItemDecrement {
 				width: @agate-picker-horizontal-item-width;
+			}
+
+			.active {
+				width: @agate-picker-horizontal-active-width;
+
+				&::before {
+					width: @agate-picker-horizontal-active-width;
+					height: @agate-picker-horizontal-item-height;
+				}
 			}
 		}
 	});
