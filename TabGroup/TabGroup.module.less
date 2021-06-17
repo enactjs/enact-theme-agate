@@ -32,7 +32,7 @@
 
 				.labeledIcon {
 					margin: @agate-panels-tab-margin;
-					padding: @agate-panels-tab-padding;
+					.padding-start-end(@agate-panels-tab-padding);
 				}
 
 				.focus({
@@ -70,7 +70,7 @@
 
 		&.positionAfter {
 			.tabGroup {
-				margin: @agate-panels-tab-group-position-after-margin;
+				.margin-start-end(@agate-panels-tab-group-position-after-margin);
 			}
 
 			// The below code is to handle the vertical (perpendicular) alignment of the components
@@ -103,12 +103,12 @@
 		&.vertical {
 			.tabGroup {
 				margin: @agate-panels-vertical-tab-group-margin;
-				padding: @agate-panels-vertical-tab-group-padding;
+				.padding-start-end(@agate-panels-vertical-tab-group-padding);
 				transform: @agate-panels-tab-group-horizontal-transform;
 
 				.tab {
 					border-bottom: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
-					margin: @agate-panels-vertical-tab-margin;
+					.margin-start-end(@agate-panels-vertical-tab-margin);
 
 					&:last-child {
 						border-bottom-width: 0;

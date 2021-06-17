@@ -1,6 +1,7 @@
 // Panel.module.less
 //
 @import "../styles/variables.less";
+@import "../styles/mixins.less";
 @import "../styles/skin.less";
 
 .panel {
@@ -38,7 +39,7 @@
 	}
 
 	.applySkins({
-		padding: @agate-panels-panel-padding;
+		.padding-start-end(@agate-panels-panel-padding);
 
 		.header {
 			padding: @agate-panels-panel-header-padding;
