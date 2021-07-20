@@ -12,6 +12,7 @@ describe('ContextualPopupDecorator', function () {
 
 	describe('not using open', function () {
 		it('should focus the first button on start', function () {
+			Page.delay(1000);
 			expect(button1.self.isFocused()).to.be.true();
 		});
 

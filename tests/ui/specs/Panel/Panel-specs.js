@@ -14,6 +14,7 @@ describe('Panel', function () {
 
 	describe('focus management', () => {
 		it('should focus header buttons when no focusable content exists', () => {
+			Page.delay(1000);
 			expect(Page.panel1.nextButton.isFocused()).to.be.true();
 		});
 

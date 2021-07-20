@@ -6,6 +6,7 @@ describe('SwitchItem', function () {
 	});
 
 	it('should have focus on first item at start', function () {
+		Page.delay(1000);
 		expect(Page.components.switchItemDefault.self.isFocused()).to.be.true();
 	});
 

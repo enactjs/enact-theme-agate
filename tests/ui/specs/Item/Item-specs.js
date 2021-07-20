@@ -16,6 +16,7 @@ describe('Item', function () {
 		});
 
 		it('should have focus on first item at start', function () {
+			Page.delay(1000);
 			expect(item1.self.isFocused()).to.be.true();
 		});
 

@@ -7,6 +7,7 @@ describe('VirtualGridList', function () {
 	});
 
 	it('should meet initial conditions', function () {
+		Page.delay(1000);
 		expect(Page.buttonHideScrollbar.isFocused(), 'focus').to.be.true();
 	});
 

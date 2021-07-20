@@ -10,6 +10,7 @@ describe('Keypad', function () {
 		const keypad = Page.components.keypadDefault;
 
 		it('should have focus on first button at start', function () {
+			Page.delay(1000);
 			expect(keypad.button(1).isFocused()).to.be.true();
 		});
 

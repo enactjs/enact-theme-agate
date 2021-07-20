@@ -12,6 +12,7 @@ describe('IncrementSlider', function () {
 
 			describe('5-way', function () {
 				it('should increment the value of horizontal incrementSlider on right arrow key when active', function () {
+					Page.delay(1000);
 					expect(incrementSlider.decrementButton.isFocused()).to.be.true();
 					Page.spotlightRight();
 					const originalValue = incrementSlider.knobPositionHorizontal;

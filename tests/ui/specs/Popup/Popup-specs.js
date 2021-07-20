@@ -10,6 +10,7 @@ describe('Popup', function () {
 	});
 
 	it('should focus the first button on start', function () {
+		Page.delay(1000);
 		expect(popupCommon.buttonPopup1.isFocused()).to.be.true();
 	});
 

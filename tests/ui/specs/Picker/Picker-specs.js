@@ -13,6 +13,7 @@ describe('Picker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the picker', function () {
+					Page.delay(1000);
 					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);

@@ -21,6 +21,7 @@ describe('TimePicker', function () {
 					Page.spotlightRight();
 					browser.waitUntil(() => timePicker.incrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
 				} else {
+					Page.delay(1000);
 					browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
 					Page.spotlightRight();
 					browser.waitUntil(() => timePicker.decrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});

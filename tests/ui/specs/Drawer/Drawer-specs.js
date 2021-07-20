@@ -10,6 +10,7 @@ describe('Drawer', function () {
 	});
 
 	it('should focus the first button on start', function () {
+		Page.delay(1000);
 		expect(drawerCommon.buttonDrawer1.isFocused()).to.be.true();
 	});
 

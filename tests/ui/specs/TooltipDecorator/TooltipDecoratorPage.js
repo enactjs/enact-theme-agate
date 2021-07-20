@@ -53,6 +53,7 @@ class TooltipDecoratorPage extends Page {
 
 	open (urlExtra) {
 		super.open('TooltipDecorator-View', urlExtra);
+		this.delay(1000);
 	}
 }
 

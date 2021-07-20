@@ -6,6 +6,7 @@ describe('ImageItem', function () {
 	});
 
 	it('should have focus on first ImageItem at start', function () {
+		Page.delay(1000);
 		expect(Page.components.imageItemDefault.self.isFocused()).to.be.true();
 	});
 

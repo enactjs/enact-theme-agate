@@ -4,6 +4,7 @@ describe('Input', function () {
 
 	it('should have focus on first input at start', function () {
 		Page.open();
+		Page.delay(1000);
 		expect(Page.input1.isFocused()).to.be.true();
 	});
 

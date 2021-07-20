@@ -7,6 +7,7 @@ describe('VirtualList', function () {
 	});
 
 	it('should meet initial conditions', function () {
+		Page.delay(1000);
 		expect(Page.buttonHideScrollbar.isFocused()).to.be.true();
 	});
 

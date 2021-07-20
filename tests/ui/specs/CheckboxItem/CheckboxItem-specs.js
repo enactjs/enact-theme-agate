@@ -13,6 +13,7 @@ describe('CheckboxItem', function () {
 			const checkboxItem = Page.components.checkboxItemDefault;
 
 			it('should have focus on first item at start', function () {
+				Page.delay(1000);
 				expect(checkboxItem.self.isFocused()).to.be.true();
 			});
 

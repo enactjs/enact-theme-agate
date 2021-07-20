@@ -8,6 +8,7 @@ describe('ColorPicker', function () {
 
 	describe('focus management', function () {
 		it('should focus the `#colorPickerDefault` when page loads', function () {
+			Page.delay(1000);
 			expect(Page.components.colorPickerDefault.button.isFocused()).to.be.true();
 		});
 	});
