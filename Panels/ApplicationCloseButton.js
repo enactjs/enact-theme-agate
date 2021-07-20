@@ -46,7 +46,7 @@ const ApplicationCloseButton = kind({
 		return (
 			<Button
 				{...rest}
-				onTap={onApplicationClose}
+				onClick={onApplicationClose}
 				size="small"
 				icon="closex"
 			/>
