@@ -33,6 +33,11 @@ const RadioItemTests = [
 	<RadioItem inline><Icon slot="slotBefore">home</Icon>RadioItem</RadioItem>,
 	<RadioItem selected><Icon slot="slotBefore">home</Icon>RadioItem Checked</RadioItem>,
 	<RadioItem selected inline><Icon slot="slotBefore">home</Icon>RadioItem Checked</RadioItem>,
+
+	// Custom icon - PLAT-141628
+	<RadioItem icon="earphone">RadioItem</RadioItem>,
+	<RadioItem icon="uninstall">RadioItem</RadioItem>,
+
 	// *************************************************************
 	// locale = 'ar-SA'
 
