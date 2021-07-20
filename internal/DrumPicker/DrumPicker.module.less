@@ -1,0 +1,112 @@
+// DrumPicker.module.less
+//
+@import "../../styles/mixins.less";
+@import "../../styles/variables.less";
+@import "../../styles/skin.less";
+
+.drumPicker {
+	align-items: center;
+	justify-content: center;
+	min-width: 72px;
+	overflow: hidden;
+	position: relative;
+
+	.root {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		z-index: 1;
+	}
+
+	&.horizontal {
+		.root {
+			display: inline-flex;
+			flex-direction: row;
+		}
+	}
+
+	.applySkins({
+		font-weight: @agate-picker-font-weight;
+		font-size: @agate-picker-font-size;
+		border-radius: @agate-picker-border-radius;
+		transform: @agate-picker-transform;
+		height: @agate-drumPicker-height;
+		padding: @agate-drumPicker-padding;
+
+		.focus({
+			background-color: @agate-drumPicker-focus-bg-color;
+			background-image: @agate-drumPicker-focus-bg-image;
+		});
+
+		.root {
+			padding: @agate-drumPicker-root-padding;
+		}
+
+		.sizingPlaceholder {
+			font-size: @agate-picker-active-font-size;
+			font-weight: @agate-picker-active-font-weight;
+			height: 0;
+			line-height: 0;
+			padding-left: .extract(@agate-picker-padding, left)[];
+			padding-right: .extract(@agate-picker-padding, right)[];
+			visibility: hidden;
+		}
+
+		.item,
+		.itemDecrement,
+		.itemIncrement {
+			height: @agate-drumPicker-item-height;
+			line-height: @agate-drumPicker-item-height;
+			width: auto;
+
+
+			&.selectedItem {
+				color: @agate-picker-active-color;
+				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
+			}
+
+			.focus({
+				color: @agate-picker-item-focus-color;
+			});
+
+		}
+
+		.indicator {
+			background-color: @agate-picker-active-bg-color;
+			background-image: @agate-picker-active-bg-image;
+			height: @agate-drumPicker-item-height;
+			left: 0;
+			margin: @agate-drumPicker-margin;
+			position: absolute;
+			right: 0;
+			top: @agate-drumPicker-item-height;
+			z-index: -1;
+		}
+
+		&.horizontal {
+			height: @agate-drumPicker-item-height;
+			width: calc(3*@agate-picker-horizontal-item-width);
+			padding: @agate-drumPicker-horizontal-padding;
+
+			.root {
+				padding: @agate-drumPicker-horizontal-root-padding;
+			}
+
+			.item,
+			.itemDecrement,
+			.itemIncrement {
+				bottom: 0;
+				margin: @agate-drumPicker-horizontal-margin;
+				top: 0;
+				width: @agate-picker-horizontal-item-width;
+			}
+
+			.indicator {
+				bottom: 0;
+				left: @agate-picker-horizontal-item-width;
+				top: 0;
+			}
+		}
+	});
+}

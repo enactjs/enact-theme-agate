@@ -3,32 +3,33 @@ const {Page} = require('@enact/ui-test-utils/utils');
 const {element} = require('@enact/ui-test-utils/utils');
 
 class RangePickerInterface {
-	constructor (id) {
-		this.id = id;
+	constructor (className) {
+		this.className = className;
+		this.selector = `.${this.className}`;
 	}
 
 	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+		return browser.execute((el) => el.focus(), $(`.${this.className}>div`));
 	}
 
 	get self () {
-		return $(`#${this.id}`, browser);
+		return $(this.selector);
 	}
 
 	get rangePicker () {
-		return element('.internal_Picker_Picker_picker', this.self);
+		return element('.internal_DrumPicker_DrumPicker_drumPicker', this.self);
 	}
 
 	decrementer (rangePicker) {
-		return element('.internal_Picker_Picker_itemDecrement', rangePicker);
+		return element('.internal_DrumPicker_DrumPicker_itemDecrement', rangePicker);
 	}
 
 	incrementer (rangePicker) {
-		return element('.internal_Picker_Picker_itemIncrement', rangePicker);
+		return element('.internal_DrumPicker_DrumPicker_itemIncrement', rangePicker);
 	}
 
-	active (rangePicker) {
-		return element('.internal_Picker_Picker_active', rangePicker);
+	selectedItem (rangePicker) {
+		return element('.internal_DrumPicker_DrumPicker_selectedItem', rangePicker);
 	}
 }
 

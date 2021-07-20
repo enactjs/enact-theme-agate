@@ -4,9 +4,9 @@
 const daysInMonth = ({month, year}) => new Date(year, month, 0).getDate();
 
 const extractValues = (picker) => {
-	const day = parseInt(picker.active(picker.day).getText());
-	const month = parseInt(picker.active(picker.month).getText());
-	const year = parseInt(picker.active(picker.year).getText());
+	const day = parseInt(picker.selectedItem(picker.day).getText());
+	const month = parseInt(picker.selectedItem(picker.month).getText());
+	const year = parseInt(picker.selectedItem(picker.year).getText());
 
 	return {day, month, year};
 };

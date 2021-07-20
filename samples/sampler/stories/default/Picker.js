@@ -1,11 +1,11 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import {PickerBase} from '@enact/agate/internal/Picker';
+import {DrumPickerBase} from '@enact/agate/internal/DrumPicker';
 import Picker from '@enact/agate/Picker';
 
 Picker.displayName = 'Picker';
-const Config = mergeComponentMetadata('Picker', Picker, PickerBase);
+const Config = mergeComponentMetadata('Picker', Picker, DrumPickerBase);
 
 export default {
 	title: 'Agate/Picker',

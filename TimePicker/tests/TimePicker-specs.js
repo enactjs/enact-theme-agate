@@ -7,9 +7,6 @@ import css from '../TimePicker.module.less';
 // otherwise, nothing renders in the label.
 
 describe('TimePicker', () => {
-
-	// Suite-wide setup
-
 	test('should emit an onChange event when changing a component picker',
 		() => {
 			const handleChange = jest.fn();

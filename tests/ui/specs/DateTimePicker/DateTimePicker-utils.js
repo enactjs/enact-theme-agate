@@ -4,12 +4,12 @@
 const daysInMonth = ({month, year}) => new Date(year, month, 0).getDate();
 
 const extractValues = (picker) => {
-	const day = parseInt(picker.active(picker.day).getText());
-	const month = parseInt(picker.active(picker.month).getText());
-	const year = parseInt(picker.active(picker.year).getText());
-	const hour = parseInt(picker.active(picker.hour).getText());
-	const minute = parseInt(picker.active(picker.minute).getText());
-	const meridiem = picker.meridiem.isExisting() ? picker.active(picker.meridiem).getText() : null;
+	const day = parseInt(picker.selectedItem(picker.day).getText());
+	const month = parseInt(picker.selectedItem(picker.month).getText());
+	const year = parseInt(picker.selectedItem(picker.year).getText());
+	const hour = parseInt(picker.selectedItem(picker.hour).getText());
+	const minute = parseInt(picker.selectedItem(picker.minute).getText());
+	const meridiem = picker.meridiem.isExisting() ? picker.selectedItem(picker.meridiem).getText() : null;
 
 	return {day, month, year, hour, minute, meridiem};
 };

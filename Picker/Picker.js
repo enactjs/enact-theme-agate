@@ -12,6 +12,7 @@
  */
 
 import kind from '@enact/core/kind';
+import {mapAndFilterChildren} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
@@ -19,7 +20,7 @@ import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import {Children} from 'react';
 
-import PickerCore, {ChangeAdapter, PickerItem} from '../internal/Picker';
+import PickerCore, {DrumPickerItem} from '../internal/DrumPicker';
 
 /**
  * The base `Picker` component.
@@ -134,9 +135,13 @@ const PickerBase = kind({
 	},
 
 	computed: {
-		children: ({children}) => Children.map(children, (child) => (
-			<PickerItem>{child}</PickerItem>
-		)),
+		children: ({children, value}) => {
+			// send to internal/DrumPicker only 5 children. Current selected +/-2
+			const childrenArray = children.filter((child, index) => index >= value - 2 && index <= value + 2);
+			return (mapAndFilterChildren(childrenArray, (child) => (
+				<DrumPickerItem key={value}>{child}</DrumPickerItem>
+			)));
+		},
 		disabled: ({children, disabled}) => Children.count(children) > 1 ? disabled : true,
 		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		value: ({value, children}) => {
@@ -172,8 +177,7 @@ const PickerBase = kind({
  */
 const PickerDecorator = compose(
 	Pure,
-	Changeable,
-	ChangeAdapter
+	Changeable
 );
 
 /**

@@ -12,33 +12,17 @@ describe('DateTimePicker', function () {
 			const dateTimePicker = Page.components.dateTimePickerDefault;
 
 			it('should have hour-minute-meridiem-month-day-year order', function () {
-				const {meridiem} = extractValues(dateTimePicker);
-				if (meridiem === 'AM') {
-					Page.spotlightDown();
-					browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
-					Page.spotlightRight();
-					browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
-					Page.spotlightRight();
-					browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
-					Page.spotlightRight();
-					expect(dateTimePicker.incrementer(dateTimePicker.month).isFocused(), 'Month').to.be.true();
-					Page.spotlightRight();
-					expect(dateTimePicker.incrementer(dateTimePicker.day).isFocused(), 'Day').to.be.true();
-					Page.spotlightRight();
-					expect(dateTimePicker.incrementer(dateTimePicker.year).isFocused(), 'Year').to.be.true();
-				} else {
-					browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
-					Page.spotlightRight();
-					browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
-					Page.spotlightRight();
-					browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
-					Page.spotlightRight();
-					expect(dateTimePicker.decrementer(dateTimePicker.month).isFocused(), 'Month').to.be.true();
-					Page.spotlightRight();
-					expect(dateTimePicker.decrementer(dateTimePicker.day).isFocused(), 'Day').to.be.true();
-					Page.spotlightRight();
-					expect(dateTimePicker.decrementer(dateTimePicker.year).isFocused(), 'Year').to.be.true();
-				}
+				browser.waitUntil(() => dateTimePicker.hour.isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
+				Page.spotlightRight();
+				browser.waitUntil(() => dateTimePicker.minute.isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
+				Page.spotlightRight();
+				browser.waitUntil(() => dateTimePicker.meridiem.isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
+				Page.spotlightRight();
+				expect(dateTimePicker.month.isFocused(), 'Month').to.be.true();
+				Page.spotlightRight();
+				expect(dateTimePicker.day.isFocused(), 'Day').to.be.true();
+				Page.spotlightRight();
+				expect(dateTimePicker.year.isFocused(), 'Year').to.be.true();
 			});
 
 			describe('pointer', function () {
@@ -61,7 +45,7 @@ describe('DateTimePicker', function () {
 				it('should increase the minute when incrementing the picker', function () {
 					const {minute} = extractValues(dateTimePicker);
 					dateTimePicker.incrementer(dateTimePicker.minute).click();
-					browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  interval: 100});
+					browser.waitUntil(() => dateTimePicker.minute.isFocused(), {timeout: 1500,  interval: 100});
 					const {minute: value} = extractValues(dateTimePicker);
 					const expected = minute !== 59 ? minute + 1 : 0;
 					expect(value).to.equal(expected);
@@ -70,7 +54,7 @@ describe('DateTimePicker', function () {
 				it('should decrease the minute when decrementing the picker', function () {
 					const {minute} = extractValues(dateTimePicker);
 					dateTimePicker.decrementer(dateTimePicker.minute).click();
-					browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  interval: 100});
+					browser.waitUntil(() => dateTimePicker.minute.isFocused(), {timeout: 1500,  interval: 100});
 					const {minute: value} = extractValues(dateTimePicker);
 					const expected = minute !== 0 ? minute - 1 : 59;
 					expect(value).to.equal(expected);
@@ -97,7 +81,7 @@ describe('DateTimePicker', function () {
 				it('should increase the month when incrementing the picker', function () {
 					const {month} = extractValues(dateTimePicker);
 					dateTimePicker.incrementer(dateTimePicker.month).click();
-					expect(dateTimePicker.incrementer(dateTimePicker.month).isFocused()).to.be.true();
+					expect(dateTimePicker.month.isFocused()).to.be.true();
 					const {month: value} = extractValues(dateTimePicker);
 					const expected = month < 12 ? month + 1 : 1;
 					expect(value).to.equal(expected);
@@ -106,7 +90,7 @@ describe('DateTimePicker', function () {
 				it('should decrease the month when decrementing the picker', function () {
 					const {month} = extractValues(dateTimePicker);
 					dateTimePicker.decrementer(dateTimePicker.month).click();
-					expect(dateTimePicker.decrementer(dateTimePicker.month).isFocused()).to.be.true();
+					expect(dateTimePicker.month.isFocused()).to.be.true();
 					const {month: value} = extractValues(dateTimePicker);
 					const expected = month > 1 ? month - 1 : 12;
 					expect(value).to.equal(expected);
@@ -116,7 +100,7 @@ describe('DateTimePicker', function () {
 					const {day, month, year} = extractValues(dateTimePicker);
 					const numDays = daysInMonth({month, year});
 					dateTimePicker.incrementer(dateTimePicker.day).click();
-					expect(dateTimePicker.incrementer(dateTimePicker.day).isFocused()).to.be.true();
+					expect(dateTimePicker.day.isFocused()).to.be.true();
 					const {day: value} = extractValues(dateTimePicker);
 					const expected = day !== numDays ? day + 1 : 1;
 					expect(value).to.equal(expected);
@@ -126,7 +110,7 @@ describe('DateTimePicker', function () {
 					const {day, month, year} = extractValues(dateTimePicker);
 					const numDays = daysInMonth({month, year});
 					dateTimePicker.decrementer(dateTimePicker.day).click();
-					expect(dateTimePicker.decrementer(dateTimePicker.day).isFocused()).to.be.true();
+					expect(dateTimePicker.day.isFocused()).to.be.true();
 					const {day: value} = extractValues(dateTimePicker);
 					const expected = day !== 1 ? day - 1 : numDays;
 					expect(value).to.equal(expected);
@@ -135,7 +119,7 @@ describe('DateTimePicker', function () {
 				it('should increase the year when incrementing the picker', function () {
 					const {year} = extractValues(dateTimePicker);
 					dateTimePicker.incrementer(dateTimePicker.year).click();
-					expect(dateTimePicker.incrementer(dateTimePicker.year).isFocused()).to.be.true();
+					expect(dateTimePicker.year.isFocused()).to.be.true();
 					const {year: value} = extractValues(dateTimePicker);
 					const expected = year + 1;
 					expect(value).to.equal(expected);
@@ -144,7 +128,7 @@ describe('DateTimePicker', function () {
 				it('should decrease the year when decrementing the picker', function () {
 					const {year} = extractValues(dateTimePicker);
 					dateTimePicker.decrementer(dateTimePicker.year).click();
-					expect(dateTimePicker.decrementer(dateTimePicker.year).isFocused()).to.be.true();
+					expect(dateTimePicker.year.isFocused()).to.be.true();
 					const {year: value} = extractValues(dateTimePicker);
 					const expected = year - 1;
 					expect(value).to.equal(expected);
@@ -159,7 +143,7 @@ describe('DateTimePicker', function () {
 			describe('5-way', function () {
 				it('should not update on select', function () {
 					dateTimePicker.focus();
-					Page.spotlightSelect();
+					Page.spotlightDown();
 
 					const {day, hour, minute, meridiem,  month, year} = extractValues(dateTimePicker);
 
@@ -173,30 +157,33 @@ describe('DateTimePicker', function () {
 			});
 		});
 
-
 		describe('disabled', function () {
 			const dateTimePicker = Page.components.dateTimePickerDisabled;
 
 			it('should not increase the day when incrementing disabled picker', function () {
-				dateTimePicker.incrementer(dateTimePicker.day).click();
-				expect(dateTimePicker.incrementer(dateTimePicker.day).isFocused()).to.be.true();
+				dateTimePicker.day.click();
+				expect(dateTimePicker.day.isFocused()).to.be.true();
+				Page.spotlightDown();
+
 				browser.pause(500);
 				const {day: value} = extractValues(dateTimePicker);
 				expect(value).to.equal(1);
 			});
 
 			it('should not decrease the day when decrementing disabled picker', function () {
-				dateTimePicker.decrementer(dateTimePicker.day).click();
-				expect(dateTimePicker.decrementer(dateTimePicker.day).isFocused()).to.be.true();
+				dateTimePicker.day.click();
+				expect(dateTimePicker.day.isFocused()).to.be.true();
+				Page.spotlightUp();
 				browser.pause(500);
 				const {day: value} = extractValues(dateTimePicker);
 				expect(value).to.equal(1);
 			});
 
-			it('should not update hour on click', function () {
+			it('should not update hour when decrementing disabled picker', function () {
 				const {hour} = extractValues(dateTimePicker);
-				dateTimePicker.decrementer(dateTimePicker.hour).click();
-				expect(dateTimePicker.decrementer(dateTimePicker.hour).isFocused()).to.be.true();
+				dateTimePicker.hour.click();
+				expect(dateTimePicker.hour.isFocused()).to.be.true();
+				Page.spotlightUp();
 				browser.pause(500);
 				const {hour: value} = extractValues(dateTimePicker);
 				expect(value).to.equal(hour);
@@ -218,29 +205,34 @@ describe('DateTimePicker', function () {
 
 			});
 
-			it('should not update \'defaultValue\' on on click', function () {
+			it('should not update \'defaultValue\' on decrement', function () {
 				const {day, hour, meridiem, minute, month, year} = extractValues(dateTimePicker);
-				dateTimePicker.decrementer(dateTimePicker.month).click();
-				expect(dateTimePicker.decrementer(dateTimePicker.month).isFocused()).to.be.true();
+				dateTimePicker.month.click();
+				expect(dateTimePicker.month.isFocused()).to.be.true();
+				Page.spotlightUp();
 
-				dateTimePicker.decrementer(dateTimePicker.day).click();
-				expect(dateTimePicker.decrementer(dateTimePicker.day).isFocused()).to.be.true();
+				dateTimePicker.day.click();
+				expect(dateTimePicker.day.isFocused()).to.be.true();
+				Page.spotlightUp();
 
-				dateTimePicker.decrementer(dateTimePicker.year).click();
-				expect(dateTimePicker.decrementer(dateTimePicker.year).isFocused()).to.be.true();
+				dateTimePicker.year.click();
+				expect(dateTimePicker.year.isFocused()).to.be.true();
+				Page.spotlightUp();
 
-				dateTimePicker.decrementer(dateTimePicker.minute).click();
-				expect(dateTimePicker.decrementer(dateTimePicker.minute).isFocused()).to.be.true();
+				dateTimePicker.minute.click();
+				expect(dateTimePicker.minute.isFocused()).to.be.true();
+				Page.spotlightUp();
 
-				dateTimePicker.decrementer(dateTimePicker.hour).click();
-				expect(dateTimePicker.decrementer(dateTimePicker.hour).isFocused()).to.be.true();
+				dateTimePicker.hour.click();
+				expect(dateTimePicker.hour.isFocused()).to.be.true();
+				Page.spotlightUp();
 
+				dateTimePicker.meridiem.click();
+				expect(dateTimePicker.meridiem.isFocused()).to.be.true();
 				if (meridiem === 'AM') {
-					dateTimePicker.incrementer(dateTimePicker.meridiem).click();
-					expect(dateTimePicker.incrementer(dateTimePicker.meridiem).isFocused()).to.be.true();
+					Page.spotlightDown();
 				} else {
-					dateTimePicker.decrementer(dateTimePicker.meridiem).click();
-					expect(dateTimePicker.decrementer(dateTimePicker.meridiem).isFocused()).to.be.true();
+					Page.spotlightUp();
 				}
 
 				browser.pause(500);
@@ -263,41 +255,23 @@ describe('DateTimePicker', function () {
 		});
 
 		it('should focus hour picker when selected', function () {
-			browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
+			expect(dateTimePicker.hour.isFocused()).to.be.true();
 		});
 
 		it('should have minute-hour-meridiem-day-month-year order', function () {
-			const {meridiem} = extractValues(dateTimePicker);
-			if (meridiem === 'ص') {
-				Page.spotlightDown();
-				browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
-				Page.spotlightRight();
-				browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
-				Page.spotlightLeft();
-				browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
-				Page.spotlightLeft();
-				browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
-				Page.spotlightLeft();
-				expect(dateTimePicker.incrementer(dateTimePicker.day).isFocused()).to.be.true();
-				Page.spotlightLeft();
-				expect(dateTimePicker.incrementer(dateTimePicker.month).isFocused()).to.be.true();
-				Page.spotlightLeft();
-				expect(dateTimePicker.incrementer(dateTimePicker.year).isFocused()).to.be.true();
-			} else {
-				browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
-				Page.spotlightRight();
-				browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
-				Page.spotlightLeft();
-				browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
-				Page.spotlightLeft();
-				browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
-				Page.spotlightLeft();
-				expect(dateTimePicker.decrementer(dateTimePicker.day).isFocused()).to.be.true();
-				Page.spotlightLeft();
-				expect(dateTimePicker.decrementer(dateTimePicker.month).isFocused()).to.be.true();
-				Page.spotlightLeft();
-				expect(dateTimePicker.decrementer(dateTimePicker.year).isFocused()).to.be.true();
-			}
+			browser.waitUntil(() => dateTimePicker.hour.isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
+			Page.spotlightRight();
+			browser.waitUntil(() => dateTimePicker.minute.isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
+			Page.spotlightLeft();
+			browser.waitUntil(() => dateTimePicker.hour.isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
+			Page.spotlightLeft();
+			browser.waitUntil(() => dateTimePicker.meridiem.isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
+			Page.spotlightLeft();
+			expect(dateTimePicker.day.isFocused()).to.be.true();
+			Page.spotlightLeft();
+			expect(dateTimePicker.month.isFocused()).to.be.true();
+			Page.spotlightLeft();
+			expect(dateTimePicker.year.isFocused()).to.be.true();
 		});
 	});
 
@@ -313,28 +287,33 @@ describe('DateTimePicker', function () {
 		});
 
 		it('should display hours in 24-hour format', function () {
-			dateTimePicker.incrementer(dateTimePicker.hour).click();
+			dateTimePicker.hour.click();
+			Page.spotlightDown();
 			expect(extractValues(dateTimePicker).hour).to.equal(13);
 		});
 
 		it('should increment hours from 23 to 0', function () {
+			dateTimePicker.hour.click();
 			// go to 23 first
 			for (let i = 11; i; i -= 1) {
-				dateTimePicker.incrementer(dateTimePicker.hour).click();
+				Page.spotlightDown();
 			}
+			browser.pause(1000);
 			expect(extractValues(dateTimePicker).hour).to.equal(23);
 			// now increment
-			dateTimePicker.incrementer(dateTimePicker.hour).click();
+			Page.spotlightDown();
 			expect(extractValues(dateTimePicker).hour).to.equal(0);
+
 		});
 
 		it('should decrement hours from 0 to 23', function () {
+			dateTimePicker.hour.click();
 			// go to 0 first
 			for (let i = 12; i; i -= 1) {
-				dateTimePicker.decrementer(dateTimePicker.hour).click();
+				Page.spotlightUp();
 			}
 			expect(extractValues(dateTimePicker).hour).to.equal(0);
-			dateTimePicker.decrementer(dateTimePicker.hour).click();
+			Page.spotlightUp();
 			expect(extractValues(dateTimePicker).hour).to.equal(23);
 		});
 	});

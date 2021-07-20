@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import {RangePickerBase} from '../../RangePicker';
 
-import css from './DateComponentPicker.module.less';
+import componentCss from './DateComponentPicker.module.less';
 
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentRangePicker} allows the selection of
@@ -68,15 +68,15 @@ const DateComponentRangePickerBase = kind({
 	},
 
 	styles: {
-		css,
+		css: componentCss,
 		className: 'dateComponentPicker'
 	},
 
-	render: ({accessibilityHint, max, min, value, wrap, ...rest}) => (
+	render: ({accessibilityHint, className, max, min, value, wrap, ...rest}) => (
 		<RangePickerBase
 			{...rest}
 			accessibilityHint={(accessibilityHint == null) ? value : accessibilityHint}
-			css={css}
+			className={className}
 			max={max}
 			min={min}
 			orientation="vertical"

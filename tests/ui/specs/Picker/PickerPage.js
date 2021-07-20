@@ -3,32 +3,33 @@ const {Page} = require('@enact/ui-test-utils/utils');
 const {element} = require('@enact/ui-test-utils/utils');
 
 class PickerInterface {
-	constructor (id) {
-		this.id = id;
+	constructor (className) {
+		this.className = className;
+		this.selector = `.${this.className}`;
 	}
 
 	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+		return browser.execute((el) => el.focus(), $(`.${this.className}>div`));
 	}
 
 	get self () {
-		return $(`#${this.id}`, browser);
+		return $(this.selector);
 	}
 
 	get picker () {
-		return element('.internal_Picker_Picker_picker', this.self);
+		return element('.internal_DrumPicker_DrumPicker_drumPicker', this.self);
 	}
 
 	decrementer (picker) {
-		return element('.internal_Picker_Picker_itemDecrement', picker);
+		return element('.internal_DrumPicker_DrumPicker_itemDecrement', picker);
 	}
 
 	incrementer (picker) {
-		return element('.internal_Picker_Picker_itemIncrement', picker);
+		return element('.internal_DrumPicker_DrumPicker_itemIncrement', picker);
 	}
 
-	active (picker) {
-		return element('.internal_Picker_Picker_active', picker);
+	selectedItem (picker) {
+		return element('.internal_DrumPicker_DrumPicker_selectedItem', picker);
 	}
 }
 

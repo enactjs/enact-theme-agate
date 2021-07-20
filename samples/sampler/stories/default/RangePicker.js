@@ -1,11 +1,11 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
-import {PickerBase} from '@enact/agate/internal/Picker';
+import {DrumPickerBase} from '@enact/agate/internal/DrumPicker';
 import RangePicker from '@enact/agate/RangePicker';
 
 RangePicker.displayName = 'RangePicker';
-const Config = mergeComponentMetadata('RangePicker', RangePicker, PickerBase);
+const Config = mergeComponentMetadata('RangePicker', RangePicker, DrumPickerBase);
 
 export default {
 	title: 'Agate/RangePicker',

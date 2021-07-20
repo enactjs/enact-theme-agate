@@ -13,19 +13,16 @@ describe('Picker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the picker', function () {
-					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
-					Page.spotlightSelect();
+					expect(picker.self.isFocused()).to.be.true();
+					Page.spotlightDown();
 					browser.pause(500);
 					const newValue = extractValue(picker);
 					expect(newValue).to.equal('Banana');
 				});
 
 				it('should change the value backward when decrementing the picker', function () {
-					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
-					Page.spotlightSelect();
+					expect(picker.self.isFocused()).to.be.true();
 					Page.spotlightUp();
-					expect(picker.decrementer(picker.self).isFocused()).to.be.true();
-					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(picker);
 					expect(newValue).to.equal('Apple');
@@ -35,15 +32,18 @@ describe('Picker', function () {
 			describe('pointer', function () {
 				it('should increase the value when incrementing the picker', function () {
 					picker.incrementer(picker.self).click();
+					expect(picker.self.isFocused()).to.be.true();
 					browser.pause(500);
 					const newValue = extractValue(picker);
 					expect(newValue).to.equal('Banana');
 				});
 
 				it('should decrease the value when decrementing the picker', function () {
+					// first increment to second option the decrement back to first option
 					picker.incrementer(picker.self).click();
-					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
 					picker.decrementer(picker.self).click();
+					expect(picker.self.isFocused()).to.be.true();
+					picker.self.click();
 					browser.pause(500);
 					const newValue = extractValue(picker);
 					expect(newValue).to.equal('Apple');
@@ -65,9 +65,20 @@ describe('Picker', function () {
 			const picker = Page.components.pickerDisabled;
 
 			describe('5-way', function () {
-				it('should not update on select', function () {
+				it('should not update when incrementing the picker', function () {
 					const oldValue = extractValue(picker);
-					Page.spotlightSelect();
+					Page.spotlightLeft();
+					Page.spotlightDown();
+					picker.focus();
+					browser.pause(500);
+					const newValue = extractValue(picker);
+					expect(newValue).to.equal(oldValue);
+				});
+
+				it('should not update when decrementing the picker', function () {
+					const oldValue = extractValue(picker);
+					Page.spotlightLeft();
+					Page.spotlightUp();
 					picker.focus();
 					browser.pause(500);
 					const newValue = extractValue(picker);

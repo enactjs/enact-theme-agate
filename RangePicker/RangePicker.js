@@ -11,14 +11,14 @@
  */
 
 import kind from '@enact/core/kind';
-import {clamp} from '@enact/core/util';
+import {clamp, mapAndFilterChildren} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import PickerCore, {ChangeAdapter} from '../internal/Picker';
-import PickerItem from '../internal/Picker/PickerItem';
+import PickerCore from '../internal/DrumPicker';
+import DrumPickerItem from '../internal/DrumPicker/DrumPickerItem';
 
 /**
  * RangePicker base component.
@@ -171,17 +171,28 @@ const RangePickerBase = kind({
 		wrap: PropTypes.bool
 	},
 
+	defaultProps: {
+		step: 1
+	},
+
 	computed: {
+		children: ({min, max, step, value}) => {
+			// send to internal/DrumPicker only 5 children. Current selected +/-2
+			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step))).filter(child => child >= value - (step * 2) && child <= value + (step * 2));
+			return (mapAndFilterChildren(childrenArray, (child) => (
+				<DrumPickerItem key={value} marqueeDisabled>{child}</DrumPickerItem>
+			)));
+		},
 		disabled: ({disabled, max, min}) => min >= max ? true : disabled,
 		value: ({min, max, value}) => {
 			return clamp(min, max, value);
 		}
 	},
 
-	render: ({value, ...rest}) => {
+	render: ({children, value, ...rest}) => {
 		return (
-			<PickerCore {...rest} index={0} type="number" value={value}>
-				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>
+			<PickerCore {...rest} type="number" value={value}>
+				{children}
 			</PickerCore>
 		);
 	}
@@ -197,8 +208,7 @@ const RangePickerBase = kind({
  */
 const RangePickerDecorator = compose(
 	Pure,
-	Changeable,
-	ChangeAdapter
+	Changeable
 );
 
 /**

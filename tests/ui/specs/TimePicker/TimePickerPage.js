@@ -25,13 +25,15 @@ class PickerInterface {
 	}
 
 	decrementer (picker) {
-		return element('.internal_Picker_Picker_itemDecrement', picker);
+		return element('.internal_DrumPicker_DrumPicker_itemDecrement', picker);
 	}
+
 	incrementer (picker) {
-		return element('.internal_Picker_Picker_itemIncrement', picker);
+		return element('.internal_DrumPicker_DrumPicker_itemIncrement', picker);
 	}
-	active (picker) {
-		return element('.internal_Picker_Picker_active', picker);
+
+	selectedItem (picker) {
+		return element('.internal_DrumPicker_DrumPicker_selectedItem', picker);
 	}
 }
 

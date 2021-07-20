@@ -8,7 +8,6 @@ import timeCss from '../../TimePicker/TimePicker.module.less';
 // otherwise, nothing renders in the label.
 
 describe('DateTimePicker', () => {
-
 	test(
 		'should emit an onChange event when changing a component picker',
 		() => {

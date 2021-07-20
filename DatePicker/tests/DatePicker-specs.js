@@ -1,13 +1,12 @@
 import {mount} from 'enzyme';
 
-import DatePicker from '../DatePicker';
+import {DatePicker} from '../DatePicker';
 import css from '../DatePicker.module.less';
 
 // Note: Tests pass 'locale' because there's no I18nDecorator to provide a value via context and
 // otherwise, nothing renders in the label.
 
 describe('DatePicker', () => {
-
 	test(
 		'should emit an onChange event when changing a component picker',
 		() => {

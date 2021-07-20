@@ -13,19 +13,16 @@ describe('RangePicker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the rangePicker', function () {
-					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
-					Page.spotlightSelect();
+					expect(rangePicker.self.isFocused()).to.be.true();
+					Page.spotlightDown();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
-					expect(newValue).to.equal(5);
+					expect(newValue).to.equal(10);
 				});
 
 				it('should change the value backward when decrementing the rangePicker', function () {
-					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
-					Page.spotlightSelect();
+					expect(rangePicker.self.isFocused()).to.be.true();
 					Page.spotlightUp();
-					expect(rangePicker.decrementer(rangePicker.self).isFocused()).to.be.true();
-					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
 					expect(newValue).to.equal(0);
@@ -35,15 +32,15 @@ describe('RangePicker', function () {
 			describe('pointer', function () {
 				it('should increase the value when incrementing the rangePicker', function () {
 					rangePicker.incrementer(rangePicker.self).click();
+					expect(rangePicker.self.isFocused()).to.be.true();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
-					expect(newValue).to.equal(5);
+					expect(newValue).to.equal(10);
 				});
 
 				it('should decrease the value when decrementing the rangePicker', function () {
-					rangePicker.incrementer(rangePicker.self).click();
-					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
 					rangePicker.decrementer(rangePicker.self).click();
+					expect(rangePicker.self.isFocused()).to.be.true();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
 					expect(newValue).to.equal(0);
@@ -55,9 +52,20 @@ describe('RangePicker', function () {
 			const rangePicker = Page.components.rangePickerDisabled;
 
 			describe('5-way', function () {
-				it('should not update on select', function () {
+				it('should not change the value forward when incrementing the rangePicker', function () {
 					const oldValue = extractValue(rangePicker);
-					Page.spotlightSelect();
+					Page.spotlightLeft();
+					Page.spotlightDown();
+					rangePicker.focus();
+					browser.pause(500);
+					const newValue = extractValue(rangePicker);
+					expect(newValue).to.equal(oldValue);
+				});
+
+				it('should not change the value backward when decrementing the rangePicker', function () {
+					const oldValue = extractValue(rangePicker);
+					Page.spotlightLeft();
+					Page.spotlightUp();
 					rangePicker.focus();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
@@ -93,7 +101,10 @@ describe('RangePicker', function () {
 			});
 
 			it('should decrement to negative number', function () {
-				rangePicker.decrementer(rangePicker.self).click();
+				Page.spotlightRight();
+				Page.spotlightRight();
+				expect(rangePicker.self.isFocused()).to.be.true();
+				Page.spotlightUp();
 				browser.pause(500);
 				const newValue = extractValue(rangePicker);
 				expect(newValue).to.equal(-1);
