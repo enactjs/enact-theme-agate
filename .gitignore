@@ -61,6 +61,7 @@ typings/
 .env
 
 # Editor
+.idea
 .vscode
 
 # Mac
