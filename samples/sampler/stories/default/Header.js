@@ -33,6 +33,7 @@ export const _Header = () => {
 	return (
 		<Header
 			hideLine={boolean('hideLine', Config)}
+			marqueeOn={select('marqueeOn', ['hover', 'render'], Config)}
 			subtitle={text('subtitle', Config, 'Sub Title')}
 			title={text('title', Config, 'Main Title')}
 			titleAbove={text('titleAbove', Config, '')}

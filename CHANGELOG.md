@@ -14,6 +14,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/Header` Marquee for title, subtitle, and titleAbove
 - `agate/Heading` prop `showBackButton`
 - `agate/Input` prop `clearButton` and `clearIcon`
 - `agate/Keypad` prop `activeCall` to render different icons depending on whether there is an active call or not

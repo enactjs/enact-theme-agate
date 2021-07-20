@@ -6,6 +6,7 @@
 
 .header {
 	.applySkins({
+		align-items: center;
 		box-sizing: border-box;
 		position: relative;
 		border-bottom-width: @agate-header-border-bottom-width;
@@ -16,9 +17,7 @@
 		background-position: top left;
 
 		.titleContainer {
-			flex: 1 0;
-			justify-content: center;
-			padding-right: @agate-header-title-padding-right;
+			.padding-start-end(0, @agate-header-title-padding-right);
 		}
 
 		.endSlot {
